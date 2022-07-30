@@ -21,8 +21,8 @@ NOTES:
     elem.dimensions = ('datetime',)
 """
 
-metadata_df = pd.read_csv('metadata.csv')
-fn = 'pv.netcdf'
+metadata_df = pd.read_csv('data/metadata.csv')
+fn = 'data/pv.netcdf'
 #ncf = nc.Dataset(fn)   # Using xarray to open files instead of netcdf for pipeline simplicity
 ncf = xr.open_dataset(fn, engine="h5netcdf")
 #item = ncf.variables['10003']
@@ -34,3 +34,4 @@ on_pv_system = ncf['10003'].to_dataframe()
 
 on_pv_system = on_pv_system[on_pv_system.index < '2021-06-02']
 on_pv_system = on_pv_system[on_pv_system.index > '2021-06-01 10:50:00']
+print(on_pv_system)
